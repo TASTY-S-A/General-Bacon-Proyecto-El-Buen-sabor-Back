@@ -1,7 +1,5 @@
 package com.example.Foodstore.controller;
 
-
-import com.example.Foodstore.entity.Enums.Rol;
 import com.example.Foodstore.entity.Usuario;
 import com.example.Foodstore.entity.dto.UsuarioDTO;
 import com.example.Foodstore.entity.mapper.UsuarioMapper;
@@ -12,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "http://localhost:5174")
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/auth")
 
@@ -44,16 +42,12 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<UsuarioDTO> crear(@RequestBody UsuarioDTO usuarioDTO) {
-        // Verificar si el mail ya existe
         Usuario usuarioExistente = authService.obtenerPorMail(usuarioDTO.getMail());
         if (usuarioExistente != null) {
-            // Mail ya registrado
-            return ResponseEntity.status(409).body(null); // 409 Conflict
+            return ResponseEntity.status(409).body(null);
         }
-
-        // Crear nuevo usuario
         UsuarioDTO nuevoUsuario = usuarioService.crear(usuarioDTO);
-        return ResponseEntity.status(201).body(nuevoUsuario); // 201 Created
+        return ResponseEntity.status(201).body(nuevoUsuario);
     }
 
 }
