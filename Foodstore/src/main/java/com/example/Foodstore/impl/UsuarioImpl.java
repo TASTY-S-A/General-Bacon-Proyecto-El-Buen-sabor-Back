@@ -39,6 +39,23 @@ public class UsuarioImpl implements UsuarioService {
     }
 
     @Override
+    public UsuarioDTO actualizar(Long id, UsuarioDTO usuarioDTO) {
+        Usuario usuario = usuarioRepository.findById(id)
+                .orElse(null);
+        if (usuario == null) {
+            return null;
+        }
+        usuario.setNombre(usuarioDTO.getNombre());
+        usuario.setMail(usuarioDTO.getMail());
+        usuario.setContrasenia(usuarioDTO.getContrasenia());
+        usuario.setApellido(usuarioDTO.getApellido());
+        usuario.setCelular(usuarioDTO.getCelular());
+        usuario.setRol(usuarioDTO.getRol());
+        Usuario guardado = usuarioRepository.save(usuario);
+        return usuarioMapper.toDto(guardado);
+    }
+
+    @Override
     public UsuarioDTO crear(UsuarioDTO usuarioDTO) {
         Usuario usuario = usuarioMapper.toEntity(usuarioDTO);
         if (usuario.getContrasenia() != null) {

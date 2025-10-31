@@ -15,6 +15,7 @@ public class ProductoMapper {
                 .id(producto.getId())
                 .nombre(producto.getNombre())
                 .precio(producto.getPrecio())
+                .imagen(producto.getImagen())
                 .categoria( //condición ? valor_si_verdadero : valor_si_falso
                         producto.getCategoria() != null
                                 ? CategoriaDTO.builder()
@@ -32,6 +33,7 @@ public class ProductoMapper {
                 .id(dto.getId())
                 .nombre(dto.getNombre())
                 .precio(dto.getPrecio())
+                .imagen(dto.getImagen())
                 .categoria(
                         dto.getCategoria() != null
                                 ? Categoria.builder()

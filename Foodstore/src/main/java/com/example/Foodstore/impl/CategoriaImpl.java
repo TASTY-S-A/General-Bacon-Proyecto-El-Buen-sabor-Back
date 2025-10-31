@@ -8,6 +8,7 @@ import com.example.Foodstore.service.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,11 +21,16 @@ public class CategoriaImpl implements CategoriaService {
 
     @Override
     public List<CategoriaDTO> obtenerTodos() {
-        return categoriaRepository.findAll()
-                .stream()
-                .map(categoriaMapper::toDTO)
-                .collect(Collectors.toList());
+        List<Categoria> categorias = categoriaRepository.findAll();
+        List<CategoriaDTO> resultado = new ArrayList<>();
+        for (Categoria c : categorias) {
+            if (c.getEliminado() == null || !c.getEliminado()) {
+                resultado.add(categoriaMapper.toDTO(c));
+            }
+        }
+        return resultado;
     }
+
 
     @Override
     public CategoriaDTO obtenerPorId(Long id) {
@@ -40,8 +46,13 @@ public class CategoriaImpl implements CategoriaService {
     }
 
     @Override
-    public void eliminar(Long id) {
-        categoriaRepository.deleteById(id);
+    public CategoriaDTO eliminar(Long id) {
+        categoriaRepository.findById(id)
+                .ifPresent(categoria -> {
+                    categoria.setEliminado(true);
+                    categoriaRepository.save(categoria);
+                });
+        return null;
     }
 
     @Override

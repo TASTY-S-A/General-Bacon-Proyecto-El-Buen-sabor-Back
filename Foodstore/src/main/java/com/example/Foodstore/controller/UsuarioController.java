@@ -35,6 +35,11 @@ public class UsuarioController {
         return usuarioService.crear(usuarioDTO);
     }
 
+    @PutMapping("/{id}")
+    public UsuarioDTO actualizar(@PathVariable Long id, @RequestBody UsuarioDTO usuarioDTO) {
+        return usuarioService.actualizar(id, usuarioDTO);
+    }
+
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable Long id) {
         usuarioService.eliminar(id);

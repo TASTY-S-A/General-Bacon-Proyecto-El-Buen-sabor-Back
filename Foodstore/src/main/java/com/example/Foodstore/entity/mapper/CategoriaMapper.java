@@ -19,6 +19,7 @@ public class CategoriaMapper {
         return CategoriaDTO.builder()
                 .id(categoria.getId())
                 .nombre(categoria.getNombre())
+                .descripcion(categoria.getDescripcion())
                 .productos(
                         categoria.getProductos() != null
                                 ? categoria.getProductos().stream()
@@ -35,6 +36,8 @@ public class CategoriaMapper {
         return Categoria.builder()
                 .id(dto.getId())
                 .nombre(dto.getNombre())
+                .descripcion(dto.getDescripcion())
+                .imagen(dto.getImagen())
                 .build();
     }
 }

@@ -11,11 +11,8 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class Usuario{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+@SuperBuilder
+public class Usuario extends Base{
     private String nombre;
     private String apellido;
     private String mail;

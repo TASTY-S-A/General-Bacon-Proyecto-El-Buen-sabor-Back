@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
 @CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/categoria")
@@ -32,7 +31,7 @@ public class CategoriaController {
     public CategoriaDTO actualizar(@PathVariable Long id, @RequestBody CategoriaDTO categoriaDTO){
         return categoriaService.actualizar(id, categoriaDTO);
     }
-    @DeleteMapping("/{id}")
+    @PostMapping("/eliminar/{id}")
     public void eliminar(@PathVariable Long id){
         categoriaService.eliminar(id);
     }
