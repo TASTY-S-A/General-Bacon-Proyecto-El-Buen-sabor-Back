@@ -20,6 +20,7 @@ public class CategoriaMapper {
                 .id(categoria.getId())
                 .nombre(categoria.getNombre())
                 .descripcion(categoria.getDescripcion())
+                .imagen(categoria.getImagen())
                 .productos(
                         categoria.getProductos() != null
                                 ? categoria.getProductos().stream()

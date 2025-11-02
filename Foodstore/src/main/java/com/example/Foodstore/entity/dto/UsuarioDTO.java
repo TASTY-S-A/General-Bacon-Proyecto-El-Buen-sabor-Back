@@ -14,6 +14,7 @@ public class UsuarioDTO {
     private String contrasenia;
     private String apellido;
     private String celular;
+    private Boolean eliminado;
     private Rol rol;
 }
 

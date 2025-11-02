@@ -69,8 +69,13 @@ public class UsuarioImpl implements UsuarioService {
     }
 
     @Override
-    public void eliminar(Long id) {
-        usuarioRepository.deleteById(id);
+    public UsuarioDTO eliminar(Long id) {
+        usuarioRepository.findById(id)
+                .ifPresent(usuario -> {
+                    usuario.setEliminado(true);
+                    usuarioRepository.save(usuario);
+                });
+        return null;
     }
 }
 

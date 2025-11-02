@@ -30,7 +30,7 @@ public class ProductoController {
     public ProductoDTO actualizar(@PathVariable Long id, @RequestBody ProductoDTO productoDTO){
         return productoService.actualizar(id, productoDTO);
     }
-    @DeleteMapping("/{id}")
+    @PostMapping("/eliminar/{id}")
     public void eliminar(@PathVariable Long id){
         productoService.eliminar(id);
     }

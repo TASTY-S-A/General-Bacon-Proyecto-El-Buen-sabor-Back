@@ -1,5 +1,6 @@
 package com.example.Foodstore.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,6 +14,7 @@ import java.util.List;
 @Entity
 @Table(name = "categorias")
 @Data
+@JsonIgnoreProperties("categoria")
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder

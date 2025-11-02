@@ -9,6 +9,6 @@ public interface ProductoService {
     List<ProductoDTO> obtenerTodos();
     ProductoDTO obtenerPorId(Long id);
     ProductoDTO crear(ProductoDTO productoDTO);
-    void eliminar(Long id);
+    ProductoDTO eliminar(Long id);
     ProductoDTO actualizar(Long id, ProductoDTO productoDTO);
 }

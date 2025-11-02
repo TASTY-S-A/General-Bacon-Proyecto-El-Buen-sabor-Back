@@ -40,8 +40,8 @@ public class UsuarioController {
         return usuarioService.actualizar(id, usuarioDTO);
     }
 
-    @DeleteMapping("/{id}")
-    public void eliminar(@PathVariable Long id) {
-        usuarioService.eliminar(id);
+    @PostMapping("/{id}")
+    public UsuarioDTO eliminar(@PathVariable Long id) {
+        return usuarioService.eliminar(id);
     }
 }

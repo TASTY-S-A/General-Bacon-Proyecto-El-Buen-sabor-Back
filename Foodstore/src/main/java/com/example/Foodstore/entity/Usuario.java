@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
-import java.util.List;
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "usuarios")
 @Data
