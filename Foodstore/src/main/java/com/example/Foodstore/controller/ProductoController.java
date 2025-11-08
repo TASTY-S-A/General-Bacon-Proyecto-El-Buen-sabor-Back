@@ -1,5 +1,6 @@
 package com.example.Foodstore.controller;
 
+import com.example.Foodstore.entity.Producto;
 import com.example.Foodstore.entity.dto.ProductoDTO;
 import com.example.Foodstore.service.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,16 +27,14 @@ public class ProductoController {
     public ProductoDTO crear(@RequestBody ProductoDTO productoDTO){
         return productoService.crear(productoDTO);
     }
-    @PutMapping("/{id}")
-    public ProductoDTO actualizar(@PathVariable Long id, @RequestBody ProductoDTO productoDTO){
+    @PatchMapping("/{id}")
+    public Producto actualizar(@PathVariable Long id, @RequestBody ProductoDTO productoDTO){
         return productoService.actualizar(id, productoDTO);
     }
     @PostMapping("/eliminar/{id}")
     public void eliminar(@PathVariable Long id){
         productoService.eliminar(id);
     }
-
-
     @GetMapping("/obtenerPorCategoria/{id}")
     public List<ProductoDTO> obtenerPorCategoria(@PathVariable Long id){
         return productoService.obtenerPorCategoria(id);

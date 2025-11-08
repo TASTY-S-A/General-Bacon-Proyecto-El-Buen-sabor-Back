@@ -9,7 +9,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
@@ -21,7 +21,7 @@ import java.util.List;
 @SuperBuilder
 
 public class Pedido extends Base{
-    private LocalDateTime fecha;
+    private LocalDate fecha;
     private Double total;
     @Enumerated(EnumType.STRING)
     private Estado estado;

@@ -5,7 +5,9 @@ import com.example.Foodstore.entity.Producto;
 import com.example.Foodstore.entity.dto.CategoriaDTO;
 import com.example.Foodstore.entity.dto.PedidoDTO;
 import com.example.Foodstore.entity.dto.ProductoDTO;
+import com.example.Foodstore.entity.mapper.CategoriaMapper;
 import com.example.Foodstore.entity.mapper.ProductoMapper;
+import com.example.Foodstore.repository.CategoriaRepository;
 import com.example.Foodstore.repository.ProductoRepository;
 import com.example.Foodstore.service.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,9 @@ public class ProductoImpl implements ProductoService {
     private ProductoMapper productoMapper;
     @Autowired
     private ProductoRepository productoRepository;
+    @Autowired
+    private CategoriaRepository categoriaRepository;
+
 
     @Override
     public List<ProductoDTO> obtenerTodos() {
@@ -58,21 +63,27 @@ public class ProductoImpl implements ProductoService {
     }
 
     @Override
-    public ProductoDTO actualizar(Long id, ProductoDTO productoDTO) {
+    public Producto actualizar(Long id, ProductoDTO dto) {
+        dto.setId(id);
         Producto producto = productoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
-        producto.setNombre(productoDTO.getNombre());
-        producto.setPrecio(productoDTO.getPrecio());
-        producto.setStock(productoDTO.getStock());
-        producto.setImagen(productoDTO.getImagen());
-        return productoMapper.toDto(productoRepository.save(producto));
+        if (dto.getNombre() != null) producto.setNombre(dto.getNombre());
+        if (dto.getPrecio() != null) producto.setPrecio(dto.getPrecio());
+        if (dto.getImagen() != null) producto.setImagen(dto.getImagen());
+        if (dto.getStock() != null) producto.setStock(dto.getStock());
+        if (dto.getCategoria() != null && dto.getCategoria().getId() != null) {
+            Categoria categoria = categoriaRepository.findById(dto.getCategoria().getId())
+                    .orElseThrow(() -> new RuntimeException("Categoría no encontrada"));
+            producto.setCategoria(categoria);
+        }
+        return productoRepository.save(producto);
     }
 
     @Override
     public List<ProductoDTO> obtenerPorCategoria(Long id) {
         return productoRepository.findAll().stream()
-                .filter(p -> (p.getEliminado() == null || !p.getEliminado()))
-                .filter(p -> p.getCategoria().getId().equals(id))
+                .filter(p -> p.getEliminado() == null || !p.getEliminado())
+                .filter(p -> id == 0 || p.getCategoria().getId().equals(id))
                 .map(productoMapper::toDto)
                 .toList();
     }

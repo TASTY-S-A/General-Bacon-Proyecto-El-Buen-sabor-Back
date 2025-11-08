@@ -16,7 +16,7 @@ import com.example.Foodstore.service.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -68,7 +68,7 @@ public class PedidoImpl implements PedidoService {
             pedido.setEstado(Estado.PENDIENTE);
         }
         if(pedidoDTO.getFecha() == null){
-            pedido.setFecha(LocalDateTime.now());
+            pedido.setFecha(LocalDate.now());
         }
         if (pedidoDTO.getProductos() != null && !pedidoDTO.getProductos().isEmpty()) {
             List<Producto> productos = pedidoDTO.getProductos().stream()

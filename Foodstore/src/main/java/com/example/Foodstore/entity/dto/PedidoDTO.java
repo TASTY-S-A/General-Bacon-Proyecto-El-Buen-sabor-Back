@@ -9,7 +9,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -19,7 +19,7 @@ import java.util.List;
 @Builder
 public class PedidoDTO{
     private Long id;
-    private LocalDateTime fecha;
+    private LocalDate fecha;
     private Double total;
     private Estado estado;
     private String direccion;
