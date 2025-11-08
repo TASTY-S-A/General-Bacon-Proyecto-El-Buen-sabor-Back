@@ -11,4 +11,5 @@ public interface ProductoService {
     ProductoDTO crear(ProductoDTO productoDTO);
     ProductoDTO eliminar(Long id);
     ProductoDTO actualizar(Long id, ProductoDTO productoDTO);
+    List<ProductoDTO> obtenerPorCategoria(Long id);
 }

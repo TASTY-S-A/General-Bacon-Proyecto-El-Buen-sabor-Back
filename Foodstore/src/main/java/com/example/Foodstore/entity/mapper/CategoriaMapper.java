@@ -21,7 +21,7 @@ public class CategoriaMapper {
                 .nombre(categoria.getNombre())
                 .descripcion(categoria.getDescripcion())
                 .imagen(categoria.getImagen())
-                .productos(
+                .productos( //condición ? valor_si_verdadero : valor_si_falso
                         categoria.getProductos() != null
                                 ? categoria.getProductos().stream()
                                 .map(productoMapper::toDto)

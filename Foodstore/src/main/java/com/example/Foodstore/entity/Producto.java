@@ -9,6 +9,8 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
+import java.util.List;
+
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "productos")
@@ -26,4 +28,6 @@ public class Producto extends Base{
     @JoinColumn(name = "categoria_id", nullable = true)
     @JsonIgnoreProperties("productos")
     private Categoria categoria;
+    @ManyToMany(mappedBy = "productos")
+    private List<Pedido> pedidos;
 }

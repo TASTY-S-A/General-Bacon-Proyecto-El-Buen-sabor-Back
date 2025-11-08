@@ -3,6 +3,7 @@ package com.example.Foodstore.impl;
 import com.example.Foodstore.entity.Categoria;
 import com.example.Foodstore.entity.Producto;
 import com.example.Foodstore.entity.dto.CategoriaDTO;
+import com.example.Foodstore.entity.dto.PedidoDTO;
 import com.example.Foodstore.entity.dto.ProductoDTO;
 import com.example.Foodstore.entity.mapper.ProductoMapper;
 import com.example.Foodstore.repository.ProductoRepository;
@@ -65,5 +66,14 @@ public class ProductoImpl implements ProductoService {
         producto.setStock(productoDTO.getStock());
         producto.setImagen(productoDTO.getImagen());
         return productoMapper.toDto(productoRepository.save(producto));
+    }
+
+    @Override
+    public List<ProductoDTO> obtenerPorCategoria(Long id) {
+        return productoRepository.findAll().stream()
+                .filter(p -> (p.getEliminado() == null || !p.getEliminado()))
+                .filter(p -> p.getCategoria().getId().equals(id))
+                .map(productoMapper::toDto)
+                .toList();
     }
 }

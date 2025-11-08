@@ -35,4 +35,9 @@ public class ProductoController {
         productoService.eliminar(id);
     }
 
+
+    @GetMapping("/obtenerPorCategoria/{id}")
+    public List<ProductoDTO> obtenerPorCategoria(@PathVariable Long id){
+        return productoService.obtenerPorCategoria(id);
+    }
 }
