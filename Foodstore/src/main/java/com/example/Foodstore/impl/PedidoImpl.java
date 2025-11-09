@@ -59,9 +59,9 @@ public class PedidoImpl implements PedidoService {
     public PedidoDTO crear(PedidoDTO pedidoDTO) {
         Pedido pedido = pedidoMapper.toEntity(pedidoDTO);
 
-        if (pedidoDTO.getUsuario() != null && pedidoDTO.getUsuario().getId() != null) {
-            Usuario usuario = usuarioRepository.findById(pedidoDTO.getUsuario().getId())
-                    .orElseThrow(() -> new RuntimeException("Usuario no encontrado: " + pedidoDTO.getUsuario().getId()));
+        if (pedidoDTO.getUsuarioId() != null) {
+            Usuario usuario = usuarioRepository.findById(pedidoDTO.getUsuarioId())
+                    .orElseThrow(() -> new RuntimeException("Usuario no encontrado: " + pedidoDTO.getUsuarioId()));
             pedido.setUsuario(usuario);
         }
         if(pedidoDTO.getEstado() == null) {
@@ -113,8 +113,10 @@ public class PedidoImpl implements PedidoService {
                             .collect(Collectors.toList())
             );
         }
-        if (pedidoDTO.getUsuario() != null) {
-            pedido.setUsuario(pedidoDTO.getUsuario());
+        if (pedidoDTO.getUsuarioId() != null) {
+            Usuario usuario = usuarioRepository.findById(pedidoDTO.getUsuarioId())
+                    .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+            pedido.setUsuario(usuario);
         }
         return pedidoMapper.toDTO(pedidoRepository.save(pedido));
     }

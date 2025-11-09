@@ -1,6 +1,7 @@
 package com.example.Foodstore.service;
 
 
+import com.example.Foodstore.entity.dto.PedidoDTO;
 import com.example.Foodstore.entity.dto.UsuarioDTO;
 
 import java.util.List;
@@ -11,5 +12,6 @@ public interface UsuarioService {
     UsuarioDTO crear(UsuarioDTO usuarioDTO);
     UsuarioDTO actualizar(Long id, UsuarioDTO usuarioDTO);
     UsuarioDTO eliminar(Long id);
+    List<PedidoDTO> obtenerPedidos(Long id);
 }
 

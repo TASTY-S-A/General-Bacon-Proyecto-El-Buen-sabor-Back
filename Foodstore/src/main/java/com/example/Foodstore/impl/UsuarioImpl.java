@@ -3,8 +3,11 @@ package com.example.Foodstore.impl;
 
 import com.example.Foodstore.entity.Enums.Rol;
 import com.example.Foodstore.entity.Usuario;
+import com.example.Foodstore.entity.dto.PedidoDTO;
 import com.example.Foodstore.entity.dto.UsuarioDTO;
+import com.example.Foodstore.entity.mapper.PedidoMapper;
 import com.example.Foodstore.entity.mapper.UsuarioMapper;
+import com.example.Foodstore.repository.PedidoRepository;
 import com.example.Foodstore.repository.UsuarioRepository;
 import com.example.Foodstore.service.UsuarioService;
 import com.example.Foodstore.utils.Sha256Util;
@@ -22,6 +25,12 @@ public class UsuarioImpl implements UsuarioService {
 
     @Autowired
     private UsuarioMapper usuarioMapper;
+
+    @Autowired
+    private PedidoMapper pedidoMapper;
+
+    @Autowired
+    private PedidoRepository pedidoRepository;
 
     @Override
     public List<UsuarioDTO> obtenerTodos() {
@@ -76,6 +85,16 @@ public class UsuarioImpl implements UsuarioService {
                     usuarioRepository.save(usuario);
                 });
         return null;
+    }
+
+    @Override
+    public List<PedidoDTO> obtenerPedidos(Long id) {
+        return usuarioRepository.findById(id)
+                .map(usuario -> usuario.getPedidos()
+                        .stream()
+                        .map(pedidoMapper::toDTO)
+                        .collect(Collectors.toList()))
+                .orElse(null);
     }
 }
 

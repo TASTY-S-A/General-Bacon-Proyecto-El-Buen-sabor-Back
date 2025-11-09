@@ -3,6 +3,8 @@ package com.example.Foodstore.entity.dto;
 import com.example.Foodstore.entity.Enums.Rol;
 import lombok.*;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -16,5 +18,6 @@ public class UsuarioDTO {
     private String celular;
     private Boolean eliminado;
     private Rol rol;
+    private List<PedidoDTO> pedidos;
 }
 

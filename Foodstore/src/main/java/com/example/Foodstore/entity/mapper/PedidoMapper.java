@@ -9,10 +9,11 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
 @Component
 @RequiredArgsConstructor
+
 public class PedidoMapper {
+
     private final ProductoMapper productoMapper;
 
     public PedidoDTO toDTO(Pedido pedido) {
@@ -26,13 +27,17 @@ public class PedidoMapper {
                 .direccion(pedido.getDireccion())
                 .metodoPago(pedido.getMetodoPago())
                 .productos(
-                        pedido.getProductos() != null
-                                ? pedido.getProductos().stream()
-                                .map(productoMapper::toDto)
-                                .collect(Collectors.toList())
+                        pedido.getProductos() != null ?
+                                pedido.getProductos().stream()
+                                        .map(productoMapper::toDto)
+                                        .collect(Collectors.toList())
                                 : List.of()
                 )
-                .usuario(pedido.getUsuario())
+                .usuarioId(
+                        pedido.getUsuario() != null ?
+                                pedido.getUsuario().getId() :
+                                null
+                )
                 .build();
     }
 
@@ -45,16 +50,18 @@ public class PedidoMapper {
                 .estado(dto.getEstado())
                 .direccion(dto.getDireccion())
                 .metodoPago(dto.getMetodoPago())
-                .productos(dto.getProductos() != null
-                        ? dto.getProductos().stream()
-                        .map(p -> Producto.builder()
-                                .id(p.getId())
-                                .build())
-                        .collect(Collectors.toList())
-                        : List.of())
-                .usuario(dto.getUsuario() != null && dto.getUsuario().getId() != null
-                        ? Usuario.builder().id(dto.getUsuario().getId()).build()
-                        : null)
+                .productos(
+                        dto.getProductos() != null ?
+                                dto.getProductos().stream()
+                                        .map(p -> Producto.builder().id(p.getId()).build())
+                                        .collect(Collectors.toList())
+                                : List.of()
+                )
+                .usuario(
+                        dto.getUsuarioId() != null ?
+                                Usuario.builder().id(dto.getUsuarioId()).build() :
+                                null
+                )
                 .build();
     }
 }

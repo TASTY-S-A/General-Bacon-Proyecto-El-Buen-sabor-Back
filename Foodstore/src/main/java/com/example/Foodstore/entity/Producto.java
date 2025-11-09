@@ -28,6 +28,4 @@ public class Producto extends Base{
     @JoinColumn(name = "categoria_id", nullable = true)
     @JsonIgnoreProperties("productos")
     private Categoria categoria;
-    @ManyToMany(mappedBy = "productos")
-    private List<Pedido> pedidos;
 }

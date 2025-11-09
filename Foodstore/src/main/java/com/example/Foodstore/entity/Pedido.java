@@ -2,6 +2,7 @@ package com.example.Foodstore.entity;
 
 import com.example.Foodstore.entity.Enums.Estado;
 import com.example.Foodstore.entity.Enums.MetodoPago;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -39,5 +40,6 @@ public class Pedido extends Base{
 
     @ManyToOne
     @JoinColumn(name = "usuario_id")
+    @JsonBackReference
     private Usuario usuario;
 }

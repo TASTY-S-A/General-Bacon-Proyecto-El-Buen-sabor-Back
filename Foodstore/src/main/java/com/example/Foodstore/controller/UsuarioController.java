@@ -1,5 +1,6 @@
 package com.example.Foodstore.controller;
 
+import com.example.Foodstore.entity.dto.PedidoDTO;
 import com.example.Foodstore.entity.dto.UsuarioDTO;
 import com.example.Foodstore.service.AuthService;
 import com.example.Foodstore.service.UsuarioService;
@@ -43,5 +44,10 @@ public class UsuarioController {
     @PostMapping("/{id}")
     public UsuarioDTO eliminar(@PathVariable Long id) {
         return usuarioService.eliminar(id);
+    }
+
+    @GetMapping("/pedidos/{id}")
+    public List<PedidoDTO> obtenerPedidos(@PathVariable Long id) {
+        return usuarioService.obtenerPedidos(id);
     }
 }

@@ -25,5 +25,6 @@ public class PedidoDTO{
     private String direccion;
     private MetodoPago metodoPago;
     private List<ProductoDTO> productos;
-    private Usuario usuario;
+    private Long usuarioId;
+
 }

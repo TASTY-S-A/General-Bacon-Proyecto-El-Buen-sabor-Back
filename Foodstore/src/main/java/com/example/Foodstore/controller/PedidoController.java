@@ -35,6 +35,4 @@ public class PedidoController {
     public void eliminar(@PathVariable Long id){
         pedidoService.eliminar(id);
     }
-
-
 }
