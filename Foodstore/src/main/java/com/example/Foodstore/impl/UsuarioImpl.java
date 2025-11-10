@@ -92,6 +92,7 @@ public class UsuarioImpl implements UsuarioService {
         return usuarioRepository.findById(id)
                 .map(usuario -> usuario.getPedidos()
                         .stream()
+                        .filter(pedido -> !pedido.getEliminado())
                         .map(pedidoMapper::toDTO)
                         .collect(Collectors.toList()))
                 .orElse(null);
