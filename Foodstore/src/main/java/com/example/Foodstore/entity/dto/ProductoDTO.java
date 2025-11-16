@@ -16,5 +16,6 @@ public class ProductoDTO {
     private Double precio;
     private String imagen;
     private Integer stock;
+    private Integer cantidad;
     private CategoriaDTO categoria;
 }

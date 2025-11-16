@@ -24,6 +24,7 @@ public class PedidoMapper {
                 .fecha(pedido.getFecha())
                 .total(pedido.getTotal())
                 .estado(pedido.getEstado())
+                .cantidad(pedido.getCantidad())
                 .direccion(pedido.getDireccion())
                 .metodoPago(pedido.getMetodoPago())
                 .productos(
@@ -47,6 +48,7 @@ public class PedidoMapper {
         return Pedido.builder()
                 .fecha(dto.getFecha())
                 .total(dto.getTotal())
+                .cantidad(dto.getCantidad())
                 .estado(dto.getEstado())
                 .direccion(dto.getDireccion())
                 .metodoPago(dto.getMetodoPago())

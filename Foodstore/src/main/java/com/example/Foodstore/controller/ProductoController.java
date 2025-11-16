@@ -39,4 +39,9 @@ public class ProductoController {
     public List<ProductoDTO> obtenerPorCategoria(@PathVariable Long id){
         return productoService.obtenerPorCategoria(id);
     }
+    @PatchMapping("/cambiarStock/{id}/{stock}")
+    public ProductoDTO cambiarStock(@PathVariable Long id, @PathVariable Integer stock){
+        System.out.println("stock: " + stock + " id: "+ id);
+        return productoService.cambiarStock(id, stock);
+    }
 }

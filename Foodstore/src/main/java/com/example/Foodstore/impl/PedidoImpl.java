@@ -7,6 +7,7 @@ import com.example.Foodstore.entity.Usuario;
 import com.example.Foodstore.entity.dto.PedidoDTO;
 import com.example.Foodstore.entity.mapper.PedidoMapper;
 
+
 import com.example.Foodstore.entity.mapper.ProductoMapper;
 import com.example.Foodstore.repository.PedidoRepository;
 import com.example.Foodstore.repository.ProductoRepository;
@@ -77,6 +78,7 @@ public class PedidoImpl implements PedidoService {
                     .collect(Collectors.toList());
             pedido.setProductos(productos);
         }
+
         double total = pedido.getProductos().stream()
                 .mapToDouble(Producto::getPrecio)
                 .sum();

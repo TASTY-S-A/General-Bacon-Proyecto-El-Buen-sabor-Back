@@ -29,7 +29,7 @@ public class Pedido extends Base{
     private String direccion;
     @Enumerated(EnumType.STRING)
     private MetodoPago metodoPago;
-
+    private Integer cantidad;
     @ManyToMany
     @JoinTable(
             name = "pedido_producto",

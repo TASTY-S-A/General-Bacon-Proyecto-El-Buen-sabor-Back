@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class ProductoImpl implements ProductoService {
@@ -87,4 +86,17 @@ public class ProductoImpl implements ProductoService {
                 .map(productoMapper::toDto)
                 .toList();
     }
+
+    @Override
+    public ProductoDTO cambiarStock(Long id, Integer stock){
+        Producto producto = productoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
+        Integer stockFinal = producto.getStock() + stock;
+        if (stockFinal > 0){
+            producto.setStock(producto.getStock() + stock);
+            return productoMapper.toDto(productoRepository.save(producto));
+        }
+        return null;
+    }
+
 }
